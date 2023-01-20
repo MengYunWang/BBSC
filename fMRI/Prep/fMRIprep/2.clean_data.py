@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-clean the data preprocessed from frmriprep
+clean the data preprocessed from frmriprep with nilearn
 
 By M.-Y. Wang 23-Nov-2022
 """
