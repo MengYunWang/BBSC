@@ -59,7 +59,7 @@ for (i in 1:ncol(MRS_water_tc_morning)) {
 # correct for multiple comparisons using FDR method
 p_values_sub2 <- sapply(ttest_results_sub2, function(x) x$p.value)
 
-adjusted_p_values <- p.adjust(p_values_sub2, method = "fdr")
+# adjusted_p_values <- p.adjust(p_values_sub2, method = "fdr")
 
 # print the corrected p-values
 print(adjusted_p_values)
