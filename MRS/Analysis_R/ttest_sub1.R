@@ -15,7 +15,7 @@ setwd("/Users/wang/Desktop/Research_projects/BBSC/MRS/Output_v2_4/QuantifyResult
 morning <- c(1:4, 6, 8, 9, 10, 12, 15, 17, 18, 20, 23, 24, 27, 30, 31, 32, 34, 35, 37)
 afternoon <- c(5, 7, 11, 13, 14, 16, 19, 21, 22, 25, 26, 28, 29, 33, 36, 38)
 # the following metabolites were analysized
-mrs_of_interest <- c("Cr", "PCr", "Cr_PCr", "Glu", "Glu_Gln", "NAA", "NAA_NAAG", "PCh_GPC", "mI")
+mrs_of_interest <- c("NAA_NAAG", "NAA", "Cr_PCr", "PCr", "Cr", "Glu_Gln", "Glu", "mI", "PCh_GPC")
 
 
 # read the data
