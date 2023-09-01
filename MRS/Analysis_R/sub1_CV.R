@@ -19,7 +19,7 @@ file4 <- read.delim("A_TissCorrWaterScaled_Voxel_1_Basis_1.tsv")
 cv <- function(x) { 100 * (sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)) }
 
 # Subset the first 1:38 rows and the specified columns
-cols <- c("Cr", "PCr", "Cr_PCr", "Glu", "Glu_Gln", "NAA", "NAA_NAAG", "PCh_GPC", "mI")
+cols <- c("NAA_NAAG", "NAA", "Cr_PCr", "PCr", "Cr", "Glu_Gln", "Glu", "mI", "PCh_GPC")
 subset1 <- file1[1:38, cols]
 subset2 <- file2[1:38, cols]
 subset3 <- file3[1:38, cols]
@@ -32,7 +32,7 @@ cv3 <- apply(subset3, 2, cv)
 cv4 <- apply(subset4, 2, cv)
 
 # Store the results in a data frame
-CV_sub1 <- data.frame(column = c("Cr", "PCr", "tCr", "Glu", "Glx", "NAA", "tNAA", "tCh", "mI"), tCr = cv1, water_raw = cv2, water_CSF = cv3, water_tissue_corrected = cv4)
+CV_sub1 <- data.frame(column = c("NAA_NAAG", "NAA", "Cr_PCr", "PCr", "Cr", "Glu_Gln", "Glu", "mI", "PCh_GPC"), tCr = cv1, water_raw = cv2, water_CSF = cv3, water_tissue_corrected = cv4)
 
 # Specify the directory to save the file in
 output_dir <- "/Users/wang/Desktop/Research_projects/BBSC/MRS/analysis/"
