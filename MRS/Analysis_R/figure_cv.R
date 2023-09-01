@@ -1,7 +1,7 @@
 # This code is to plot the distribution of metabolites in Sub1
 
 # WANG. 28-April-2023
-
+# update 28-Aug-2023
 # Set the working directory to the path where your files are located
 setwd("/Users/wang/Desktop/Research_projects/BBSC/MRS/Output_v2_4/QuantifyResults")
 
@@ -13,6 +13,7 @@ rm()
 library(ggplot2)
 library(gridExtra)
 library(grid)
+library(berryFunctions)
 
 # Define file names and column names
 file_names <- "A_TissCorrWaterScaled_Voxel_1_Basis_1.tsv"
@@ -28,34 +29,63 @@ MRS_data_sub1 <- MRS_data[1:38, mrs_of_interest]
 MRS_data_sub2 <- MRS_data[39:77, mrs_of_interest]
 MRS_data_sub3 <- MRS_data[78:102, mrs_of_interest]
 
-# Add NA values to sub1
-n_missing_rows <- nrow(MRS_data_sub2) - nrow(MRS_data_sub1)
-temp <- data.frame(matrix(NA, ncol = 9, nrow = n_missing_rows))
-names(temp) <- mrs_of_interest
-MRS_data_sub1 <- rbind(MRS_data_sub1, temp)
 
-# Add NA values to sub3
-n_missing_rows <- nrow(MRS_data_sub2) - nrow(MRS_data_sub3)
-temp <- data.frame(matrix(NA, ncol = 9, nrow = n_missing_rows))
-names(temp) <- mrs_of_interest
-MRS_data_sub3 <- rbind(MRS_data_sub3, temp)
+# insert nan values to make it even so, 1:23 sessions are from Jan.to May.
+MRS_data_sub1 <- insertRows(MRS_data_sub1, 23 , new = NA)
+MRS_data_sub3 <- insertRows(MRS_data_sub3, 20:23 , new = NA)
+
+# insert nan values to make the gap, 24:27 sessions are from Jun.to Oct.
+MRS_data_sub1 <- insertRows(MRS_data_sub1, 24:27 , new = NA)
+MRS_data_sub2 <- insertRows(MRS_data_sub2, 24:27 , new = NA)
+MRS_data_sub3 <- insertRows(MRS_data_sub3, 24:27 , new = NA)
+
+# insert nan values to make it even, 28:38 sessions are from Nov.to Dec.
+MRS_data_sub3[34:38,] <- NA
+
+# insert nan values to make it even, 39:40 sessions are from jan. 2022
+MRS_data_sub1 <- insertRows(MRS_data_sub1, 39:40 , new = NA)
+MRS_data_sub2 <- insertRows(MRS_data_sub2, 39:40 , new = NA)
+MRS_data_sub3[39:40,] <- NA
+
+# insert nan values to make it even, 41:45 sessions are from Feb. 2022
+MRS_data_sub3[41:45,] <- NA
+
+# # Add NA values to sub1
+# n_missing_rows <- nrow(MRS_data_sub2) - nrow(MRS_data_sub1)
+# temp <- data.frame(matrix(NA, ncol = 9, nrow = n_missing_rows))
+# names(temp) <- mrs_of_interest
+# MRS_data_sub1 <- rbind(MRS_data_sub1, temp)
+# 
+# # Add NA values to sub3
+# n_missing_rows <- nrow(MRS_data_sub2) - nrow(MRS_data_sub3)
+# temp <- data.frame(matrix(NA, ncol = 9, nrow = n_missing_rows))
+# names(temp) <- mrs_of_interest
+# MRS_data_sub3 <- rbind(MRS_data_sub3, temp)
 
 # calculate mean and limits
-MRS_mean_sub1 <- colMeans(MRS_data_sub1)
-MRS_mean_sub2 <- colMeans(MRS_data_sub2)
-MRS_mean_sub3 <- colMeans(MRS_data_sub3)
+MRS_mean_sub1 <- colMeans(MRS_data_sub1,na.rm=TRUE)
+MRS_mean_sub2 <- colMeans(MRS_data_sub2,na.rm=TRUE)
+MRS_mean_sub3 <- colMeans(MRS_data_sub3,na.rm=TRUE)
 
 
 # Set base font size
 base_size <- 12
 
 p1_cr <- ggplot() +
-  geom_point(data=MRS_data_sub1, aes(x = seq(1, 39), y = MRS_data_sub1[,mrs_of_interest[1]], color = "#E41A1C")) +
-  geom_point(data=MRS_data_sub2, aes(x = seq(1, 39), y = MRS_data_sub2[,mrs_of_interest[1]], color = "#377EB8")) +
-  geom_point(data=MRS_data_sub3, aes(x = seq(1, 39), y = MRS_data_sub3[,mrs_of_interest[1]], color = "#4DAF4A")) +
+  geom_point(data=MRS_data_sub1, aes(x = seq(1, 45), y = (MRS_data_sub1[,mrs_of_interest[1]]/MRS_mean_sub1[mrs_of_interest[1]] - 1)*100, color = "#D40000")) +
+  geom_point(data=MRS_data_sub2, aes(x = seq(1, 45), y = (MRS_data_sub2[,mrs_of_interest[1]]/MRS_mean_sub2[mrs_of_interest[1]] - 1)*100, color = "#377EB8")) +
+  geom_point(data=MRS_data_sub3, aes(x = seq(1, 45), y = (MRS_data_sub3[,mrs_of_interest[1]]/MRS_mean_sub3[mrs_of_interest[1]] - 1)*100, color = "#4DAF4A")) +
+  geom_hline (yintercept = 15, linetype = "dashed", color = "grey",size = 1)+
+  geom_hline (yintercept = -15, linetype = "dashed", color = "grey", size =1)+
+  geom_segment(aes(x = 0.5, xend = 0.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 23.5, xend = 23.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 27.5, xend = 27.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 38.5, xend = 38.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 40.5, xend = 40.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
+  geom_segment(aes(x = 45.5, xend = 45.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
   xlab("")+
   ylab(mrs_of_name[1]) +
-  ylim(0,15)+
+  ylim(-60,60)+
   theme_bw(base_size = base_size) +
   theme(
     panel.border = element_blank(),
@@ -73,12 +103,20 @@ p1_cr
 
 
 p2_pcr <- ggplot() +
-  geom_point(data=MRS_data_sub1, aes(x = seq(1, 39), y = MRS_data_sub1[,mrs_of_interest[2]], color = "#E41A1C")) +
-  geom_point(data=MRS_data_sub2, aes(x = seq(1, 39), y = MRS_data_sub2[,mrs_of_interest[2]], color = "#377EB8")) +
-  geom_point(data=MRS_data_sub3, aes(x = seq(1, 39), y = MRS_data_sub3[,mrs_of_interest[2]], color = "#4DAF4A")) +
+  geom_point(data=MRS_data_sub1, aes(x = seq(1, 45), y = (MRS_data_sub1[,mrs_of_interest[2]]/MRS_mean_sub1[mrs_of_interest[2]] - 1)*100, color = "#D40000")) +
+  geom_point(data=MRS_data_sub2, aes(x = seq(1, 45), y = (MRS_data_sub2[,mrs_of_interest[2]]/MRS_mean_sub2[mrs_of_interest[2]] - 1)*100, color = "#377EB8")) +
+  geom_point(data=MRS_data_sub3, aes(x = seq(1, 45), y = (MRS_data_sub3[,mrs_of_interest[2]]/MRS_mean_sub3[mrs_of_interest[2]] - 1)*100, color = "#4DAF4A")) +
+  geom_hline (yintercept = 15, linetype = "dashed", color = "grey",size = 1)+
+  geom_hline (yintercept = -15, linetype = "dashed", color = "grey", size =1)+
+  geom_segment(aes(x = 0.5, xend = 0.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 23.5, xend = 23.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 27.5, xend = 27.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 38.5, xend = 38.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 40.5, xend = 40.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
+  geom_segment(aes(x = 45.5, xend = 45.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
   xlab("")+
   ylab(mrs_of_name[2]) +
-  ylim(0,15)+
+  ylim(-60,60)+
   theme_bw(base_size = base_size) +
   theme(
     panel.border = element_blank(),
@@ -95,14 +133,20 @@ p2_pcr <- ggplot() +
 p2_pcr
 
 p3_tcr <- ggplot() +
-  geom_point(data=MRS_data_sub1, aes(x = seq(1, 39), y = MRS_data_sub1[,mrs_of_interest[3]], color = "#E41A1C")) +
-  geom_point(data=MRS_data_sub2, aes(x = seq(1, 39), y = MRS_data_sub2[,mrs_of_interest[3]], color = "#377EB8")) +
-  geom_point(data=MRS_data_sub3, aes(x = seq(1, 39), y = MRS_data_sub3[,mrs_of_interest[3]], color = "#4DAF4A")) +
-  geom_hline(yintercept = MRS_mean_sub1[3], linetype = "solid") +
-
+  geom_point(data=MRS_data_sub1, aes(x = seq(1, 45), y = (MRS_data_sub1[,mrs_of_interest[3]]/MRS_mean_sub1[mrs_of_interest[3]] - 1)*100, color = "#D40000")) +
+  geom_point(data=MRS_data_sub2, aes(x = seq(1, 45), y = (MRS_data_sub2[,mrs_of_interest[3]]/MRS_mean_sub2[mrs_of_interest[3]] - 1)*100, color = "#377EB8")) +
+  geom_point(data=MRS_data_sub3, aes(x = seq(1, 45), y = (MRS_data_sub3[,mrs_of_interest[3]]/MRS_mean_sub3[mrs_of_interest[3]] - 1)*100, color = "#4DAF4A")) +
+  geom_hline (yintercept = 15, linetype = "dashed", color = "grey",size = 1)+
+  geom_hline (yintercept = -15, linetype = "dashed", color = "grey", size =1)+
+  geom_segment(aes(x = 0.5, xend = 0.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 23.5, xend = 23.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 27.5, xend = 27.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 38.5, xend = 38.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 40.5, xend = 40.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
+  geom_segment(aes(x = 45.5, xend = 45.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
   xlab("")+
   ylab(mrs_of_name[3]) +
-  ylim(0,15)+
+  ylim(-60,60)+
   theme_bw(base_size = base_size) +
   theme(
     panel.border = element_blank(),
@@ -119,14 +163,23 @@ p3_tcr <- ggplot() +
 p3_tcr
 
 p4_glu <- ggplot() +
-  geom_point(data=MRS_data_sub1, aes(x = seq(1, 39), y = MRS_data_sub1[,mrs_of_interest[4]], color = "#E41A1C")) +
-  geom_point(data=MRS_data_sub2, aes(x = seq(1, 39), y = MRS_data_sub2[,mrs_of_interest[4]], color = "#377EB8")) +
-  geom_point(data=MRS_data_sub3, aes(x = seq(1, 39), y = MRS_data_sub3[,mrs_of_interest[4]], color = "#4DAF4A")) +
-  geom_hline(yintercept = MRS_mean_sub1[4], linetype = "solid") +
-
+  geom_point(data=MRS_data_sub1, aes(x = seq(1, 45), y = (MRS_data_sub1[,mrs_of_interest[4]]/MRS_mean_sub1[mrs_of_interest[4]] - 1)*100, color = "#D40000")) +
+  geom_point(data=MRS_data_sub2, aes(x = seq(1, 45), y = (MRS_data_sub2[,mrs_of_interest[4]]/MRS_mean_sub2[mrs_of_interest[4]] - 1)*100, color = "#377EB8")) +
+  geom_point(data=MRS_data_sub3, aes(x = seq(1, 45), y = (MRS_data_sub3[,mrs_of_interest[4]]/MRS_mean_sub3[mrs_of_interest[4]] - 1)*100, color = "#4DAF4A")) +
+  geom_hline (yintercept = 15, linetype = "dashed", color = "grey",size = 1)+
+  geom_hline (yintercept = -15, linetype = "dashed", color = "grey", size =1)+
+  geom_segment(aes(x = 0.5, xend = 0.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 23.5, xend = 23.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 27.5, xend = 27.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 38.5, xend = 38.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 40.5, xend = 40.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
+  geom_segment(aes(x = 45.5, xend = 45.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
+  # geom_text(aes(x = 12, y = -55, label = "Jan.>May"), face = "bold", color = "#6A3D9A", size = 5) +
+  # geom_text(aes(x = 33, y = -55, label = "Nov.&Dec."), face = "bold", color = "#6A3D9A", size = 5) +
+  # geom_text(aes(x = 43.5, y = -55, label = "Feb."), face = "bold", color = "#FFA500", size = 5) +
   xlab("")+
   ylab(mrs_of_name[4]) +
-  ylim(15,30)+
+  ylim(-60,60)+
   theme_bw(base_size = base_size) +
   theme(
     panel.border = element_blank(),
@@ -144,14 +197,23 @@ p4_glu
 
 
 p5_glx <- ggplot() +
-  geom_point(data=MRS_data_sub1, aes(x = seq(1, 39), y = MRS_data_sub1[,mrs_of_interest[5]], color = "#E41A1C")) +
-  geom_point(data=MRS_data_sub2, aes(x = seq(1, 39), y = MRS_data_sub2[,mrs_of_interest[5]], color = "#377EB8")) +
-  geom_point(data=MRS_data_sub3, aes(x = seq(1, 39), y = MRS_data_sub3[,mrs_of_interest[5]], color = "#4DAF4A")) +
-  geom_hline(yintercept = MRS_mean_sub1[5], linetype = "solid") +
-
+  geom_point(data=MRS_data_sub1, aes(x = seq(1, 45), y = (MRS_data_sub1[,mrs_of_interest[5]]/MRS_mean_sub1[mrs_of_interest[5]] - 1)*100, color = "#D40000")) +
+  geom_point(data=MRS_data_sub2, aes(x = seq(1, 45), y = (MRS_data_sub2[,mrs_of_interest[5]]/MRS_mean_sub2[mrs_of_interest[5]] - 1)*100, color = "#377EB8")) +
+  geom_point(data=MRS_data_sub3, aes(x = seq(1, 45), y = (MRS_data_sub3[,mrs_of_interest[5]]/MRS_mean_sub3[mrs_of_interest[5]] - 1)*100, color = "#4DAF4A")) +
+  geom_hline (yintercept = 15, linetype = "dashed", color = "grey",size = 1)+
+  geom_hline (yintercept = -15, linetype = "dashed", color = "grey", size =1)+
+  geom_segment(aes(x = 0.5, xend = 0.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 23.5, xend = 23.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 27.5, xend = 27.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 38.5, xend = 38.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 40.5, xend = 40.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
+  geom_segment(aes(x = 45.5, xend = 45.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
+  # geom_text(aes(x = 12, y = -55, label = "Jan.>May"), face = "bold", color = "#6A3D9A", size = 5) +
+  # geom_text(aes(x = 33, y = -55, label = "Nov.&Dec."), face = "bold", color = "#6A3D9A", size = 5) +
+  # geom_text(aes(x = 43.5, y = -55, label = "Feb."), face = "bold", color = "#FFA500", size = 5) +
   xlab("")+
   ylab(mrs_of_name[5]) +
-  ylim(15,30)+
+  ylim(-60,60)+
   theme_bw(base_size = base_size) +
   theme(
     panel.border = element_blank(),
@@ -168,14 +230,20 @@ p5_glx <- ggplot() +
 p5_glx
 
 p6_naa <- ggplot() +
-  geom_point(data=MRS_data_sub1, aes(x = seq(1, 39), y = MRS_data_sub1[,mrs_of_interest[6]], color = "#E41A1C")) +
-  geom_point(data=MRS_data_sub2, aes(x = seq(1, 39), y = MRS_data_sub2[,mrs_of_interest[6]], color = "#377EB8")) +
-  geom_point(data=MRS_data_sub3, aes(x = seq(1, 39), y = MRS_data_sub3[,mrs_of_interest[6]], color = "#4DAF4A")) +
-  geom_hline(yintercept = MRS_mean_sub1[6], linetype = "solid") +
-
+  geom_point(data=MRS_data_sub1, aes(x = seq(1, 45), y = (MRS_data_sub1[,mrs_of_interest[6]]/MRS_mean_sub1[mrs_of_interest[6]] - 1)*100, color = "#D40000")) +
+  geom_point(data=MRS_data_sub2, aes(x = seq(1, 45), y = (MRS_data_sub2[,mrs_of_interest[6]]/MRS_mean_sub2[mrs_of_interest[6]] - 1)*100, color = "#377EB8")) +
+  geom_point(data=MRS_data_sub3, aes(x = seq(1, 45), y = (MRS_data_sub3[,mrs_of_interest[6]]/MRS_mean_sub3[mrs_of_interest[6]] - 1)*100, color = "#4DAF4A")) +
+  geom_hline (yintercept = 15, linetype = "dashed", color = "grey",size = 1)+
+  geom_hline (yintercept = -15, linetype = "dashed", color = "grey", size =1)+
+  geom_segment(aes(x = 0.5, xend = 0.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 23.5, xend = 23.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 27.5, xend = 27.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 38.5, xend = 38.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 40.5, xend = 40.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
+  geom_segment(aes(x = 45.5, xend = 45.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
   xlab("")+
   ylab(mrs_of_name[6]) +
-  ylim(0,30)+
+  ylim(-60,60)+
   theme_bw(base_size = base_size) +
   theme(
     panel.border = element_blank(),
@@ -192,14 +260,20 @@ p6_naa <- ggplot() +
 p6_naa
 
 p7_tnaa <- ggplot() +
-  geom_point(data=MRS_data_sub1, aes(x = seq(1, 39), y = MRS_data_sub1[,mrs_of_interest[7]], color = "#E41A1C")) +
-  geom_point(data=MRS_data_sub2, aes(x = seq(1, 39), y = MRS_data_sub2[,mrs_of_interest[7]], color = "#377EB8")) +
-  geom_point(data=MRS_data_sub3, aes(x = seq(1, 39), y = MRS_data_sub3[,mrs_of_interest[7]], color = "#4DAF4A")) +
-  geom_hline(yintercept = MRS_mean_sub1[7], linetype = "solid") +
-
+  geom_point(data=MRS_data_sub1, aes(x = seq(1, 45), y = (MRS_data_sub1[,mrs_of_interest[7]]/MRS_mean_sub1[mrs_of_interest[7]] - 1)*100, color = "#D40000")) +
+  geom_point(data=MRS_data_sub2, aes(x = seq(1, 45), y = (MRS_data_sub2[,mrs_of_interest[7]]/MRS_mean_sub2[mrs_of_interest[7]] - 1)*100, color = "#377EB8")) +
+  geom_point(data=MRS_data_sub3, aes(x = seq(1, 45), y = (MRS_data_sub3[,mrs_of_interest[7]]/MRS_mean_sub3[mrs_of_interest[7]] - 1)*100, color = "#4DAF4A")) +
+  geom_hline (yintercept = 15, linetype = "dashed", color = "grey",size = 1)+
+  geom_hline (yintercept = -15, linetype = "dashed", color = "grey", size =1)+
+  geom_segment(aes(x = 0.5, xend = 0.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 23.5, xend = 23.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 27.5, xend = 27.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 38.5, xend = 38.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 40.5, xend = 40.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
+  geom_segment(aes(x = 45.5, xend = 45.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
   xlab("")+
   ylab(mrs_of_name[7]) +
-  ylim(0,30)+
+  ylim(-60,60)+
   theme_bw(base_size = base_size) +
   theme(
     panel.border = element_blank(),
@@ -217,14 +291,20 @@ p7_tnaa
 
 
 p8_tch <- ggplot() +
-  geom_point(data=MRS_data_sub1, aes(x = seq(1, 39), y = MRS_data_sub1[,mrs_of_interest[8]], color = "#E41A1C")) +
-  geom_point(data=MRS_data_sub2, aes(x = seq(1, 39), y = MRS_data_sub2[,mrs_of_interest[8]], color = "#377EB8")) +
-  geom_point(data=MRS_data_sub3, aes(x = seq(1, 39), y = MRS_data_sub3[,mrs_of_interest[8]], color = "#4DAF4A")) +
-  geom_hline(yintercept = MRS_mean_sub1[8], linetype = "solid") +
-
+  geom_point(data=MRS_data_sub1, aes(x = seq(1, 45), y = (MRS_data_sub1[,mrs_of_interest[8]]/MRS_mean_sub1[mrs_of_interest[8]] - 1)*100, color = "#D40000")) +
+  geom_point(data=MRS_data_sub2, aes(x = seq(1, 45), y = (MRS_data_sub2[,mrs_of_interest[8]]/MRS_mean_sub2[mrs_of_interest[8]] - 1)*100, color = "#377EB8")) +
+  geom_point(data=MRS_data_sub3, aes(x = seq(1, 45), y = (MRS_data_sub3[,mrs_of_interest[8]]/MRS_mean_sub3[mrs_of_interest[8]] - 1)*100, color = "#4DAF4A")) +
+  geom_hline (yintercept = 15, linetype = "dashed", color = "grey",size = 1)+
+  geom_hline (yintercept = -15, linetype = "dashed", color = "grey", size =1)+
+  geom_segment(aes(x = 0.5, xend = 0.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 23.5, xend = 23.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 27.5, xend = 27.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 38.5, xend = 38.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 40.5, xend = 40.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
+  geom_segment(aes(x = 45.5, xend = 45.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
   xlab("")+
   ylab(mrs_of_name[8]) +
-  ylim(0,30)+
+  ylim(-60,60)+
   theme_bw(base_size = base_size) +
   theme(
     panel.border = element_blank(),
@@ -241,13 +321,23 @@ p8_tch <- ggplot() +
 p8_tch
 
 p9_mi <- ggplot() +
-  geom_point(data=MRS_data_sub1, aes(x = seq(1, 39), y = MRS_data_sub1[,mrs_of_interest[9]], color = "#E41A1C")) +
-  geom_point(data=MRS_data_sub2, aes(x = seq(1, 39), y = MRS_data_sub2[,mrs_of_interest[9]], color = "#377EB8")) +
-  geom_point(data=MRS_data_sub3, aes(x = seq(1, 39), y = MRS_data_sub3[,mrs_of_interest[9]], color = "#4DAF4A")) + 
-  geom_hline(yintercept = MRS_mean_sub1[9], linetype = "solid") +
+  geom_point(data=MRS_data_sub1, aes(x = seq(1, 45), y = (MRS_data_sub1[,mrs_of_interest[9]]/MRS_mean_sub1[mrs_of_interest[9]] - 1)*100, color = "#D40000")) +
+  geom_point(data=MRS_data_sub2, aes(x = seq(1, 45), y = (MRS_data_sub2[,mrs_of_interest[9]]/MRS_mean_sub2[mrs_of_interest[9]] - 1)*100, color = "#377EB8")) +
+  geom_point(data=MRS_data_sub3, aes(x = seq(1, 45), y = (MRS_data_sub3[,mrs_of_interest[9]]/MRS_mean_sub3[mrs_of_interest[9]] - 1)*100, color = "#4DAF4A")) + 
+  geom_hline (yintercept = 15, linetype = "dashed", color = "grey",size = 1)+
+  geom_hline (yintercept = -15, linetype = "dashed", color = "grey", size =1)+
+  geom_segment(aes(x = 0.5, xend = 0.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 23.5, xend = 23.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 27.5, xend = 27.5, y = -15, yend = 15), linetype = "dashed", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 38.5, xend = 38.5, y = -15, yend = 15), linetype = "solid", color = "#6A3D9A", size =1) +
+  geom_segment(aes(x = 40.5, xend = 40.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
+  geom_segment(aes(x = 45.5, xend = 45.5, y = -15, yend = 15), linetype = "solid", color = "#FFA500", size =1) +
+  # geom_text(aes(x = 12, y = -55, label = "Jan.>May"), face = "bold", color = "#6A3D9A", size = 5) +
+  # geom_text(aes(x = 33, y = -55, label = "Nov.&Dec."), face = "bold", color = "#6A3D9A", size = 5) +
+  # geom_text(aes(x = 43.5, y = -55, label = "Feb."), face = "bold", color = "#FFA500", size = 5) +
   xlab("")+
   ylab(mrs_of_name[9]) +
-  ylim(0,30)+
+  ylim(-60,60)+
   theme_bw(base_size = base_size) +
   theme(
     panel.border = element_blank(),
@@ -264,18 +354,37 @@ p9_mi <- ggplot() +
 p9_mi
 
 
-# change the limits for each subplots
-p1_cr <- p1_cr + scale_y_continuous(limits = c(0, 15), breaks = c(0, 15))
-p2_pcr <- p2_pcr + scale_y_continuous(limits = c(0, 15), breaks = c(0, 15))
-p3_tcr <- p3_tcr + scale_y_continuous(limits = c(0, 15), breaks = c(0, 15))
-p4_glu <- p4_glu + scale_y_continuous(limits = c(15, 30), breaks = c(15, 30))
-p5_glx <- p5_glx + scale_y_continuous(limits = c(15, 30), breaks = c(15, 30))
-p6_naa <- p6_naa + scale_y_continuous(limits = c(10, 25), breaks = c(10, 25))
-p7_tnaa <- p7_tnaa + scale_y_continuous(limits = c(10, 25), breaks = c(10, 25))
-p8_tch <- p8_tch + scale_y_continuous(limits = c(0, 15), breaks = c(0, 15))
-p9_mi <- p9_mi + scale_y_continuous(limits = c(0, 15), breaks = c(0, 15))
+## change the limits for each subplots
+p1_cr <- p1_cr + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50)) +
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_line(),
+        axis.title.y = element_text(vjust = 3))
+p2_pcr <- p2_pcr + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))+
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_line(),
+        axis.title.y = element_text(vjust = 0))
+p3_tcr <- p3_tcr + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))
+p4_glu <- p4_glu + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))+
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_line(),
+        axis.title.y = element_text(vjust = 0))
+p5_glx <- p5_glx + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))
+p6_naa <- p6_naa + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))+
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_line(),
+        axis.title.y = element_text(vjust = 0))
+p7_tnaa <- p7_tnaa + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))
+p8_tch <- p8_tch + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))+
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_line(),
+        axis.title.y = element_text(vjust = 0))
+p9_mi <- p9_mi + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))+
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_line(),
+        axis.title.y = element_text(vjust = 0))
 
 library(patchwork)
 (p3_tcr + p2_pcr + p1_cr) / (p8_tch + p9_mi + plot_spacer())/ (p7_tnaa + p6_naa + plot_spacer())/ (p5_glx + p4_glu + plot_spacer())   
 
+p3_tcr + p2_pcr + p1_cr +  p7_tnaa + p6_naa + p8_tch +  p5_glx + p4_glu  + p9_mi
 
