@@ -1,7 +1,7 @@
 # This code is to plot the distribution of metabolites in Sub1
 
 # WANG. 28-April-2023
-# update 28-Aug-2023
+# Updated 28-Aug-2023
 # Set the working directory to the path where your files are located
 setwd("/Users/wang/Desktop/Research_projects/BBSC/MRS/Output_v2_4/QuantifyResults")
 
