@@ -1,4 +1,4 @@
-# This code is to plot the distribution of metabolites in Sub1
+# This code is to plot the Fig. 3
 
 # WANG. 28-April-2023
 # Updated 28-Aug-2023
