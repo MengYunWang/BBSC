@@ -528,7 +528,7 @@ files_nii  = {'/Users/wang/Desktop/Research_projects/BBSC/MRS/Raw_data/sub-01/an
 % the number of included groups. If no group is supplied the data will be
 % treated as one group. (You can always use the direct path)
 
-file_stat = '';
+file_stat = '/Users/wang/Desktop/Research_projects/BBSC/MRS/Output_v2_4/stat.csv';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% 5. SPECIFY OUTPUT FOLDER %%
 % The Osprey data container will be saved as a *.mat file in the output
