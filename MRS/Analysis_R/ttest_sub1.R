@@ -57,7 +57,7 @@ for (i in 1:ncol(MRS_water_tc_morning)) {
   ttest_results_sub1[[colname]] <- t.test(MRS_water_tc_morning[, i], MRS_water_tc_afternoon[, i])
 }
 
-# correct for multiple comparisons using FDR method
+# extract the p-value
 p_values_sub1 <- sapply(ttest_results_sub1, function(x) x$p.value)
 
 #adjusted_p_values <- p.adjust(p_values_sub1, method = "fdr")
