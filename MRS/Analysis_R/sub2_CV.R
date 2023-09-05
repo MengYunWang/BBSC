@@ -35,7 +35,7 @@ cv3 <- apply(subset3, 2, cv)
 cv4 <- apply(subset4, 2, cv)
 
 # Store the results in a data frame
-CV_sub2 <- data.frame(column = c("NAA_NAAG", "NAA", "Cr_PCr", "PCr", "Cr", "Glu_Gln", "Glu", "mI", "PCh_GPC"), tCr = cv1, water_raw = cv2, water_CSF = cv3, water_tissue_corrected = cv4)
+CV_sub2 <- data.frame(column = c("tNAA", "NAA", "tCr", "PCr", "Cr", "Glx", "Glu", "mI", "tCho"), tCr = cv1, water_raw = cv2, water_CSF = cv3, water_tissue_corrected = cv4)
 
 # Specify the directory to save the file in
 output_dir <- "/Users/wang/Desktop/Research_projects/BBSC/MRS/analysis/"
