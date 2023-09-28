@@ -358,27 +358,24 @@ p9_mi
 p1_cr <- p1_cr + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50)) +
   theme(axis.text.y = element_blank(),
         axis.ticks.y = element_line(),
-        axis.title.y = element_text(vjust = 3))
-p2_pcr <- p2_pcr + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))+
+        axis.title.y = element_text(vjust = 0))
+p2_pcr <- p2_pcr + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))
+p3_tcr <- p3_tcr + scale_y_continuous(limits = c(-25, 25), breaks = c(-15,0, 15))
+p4_glu <- p4_glu + scale_y_continuous(limits = c(-25, 25), breaks = c(-15,0, 15))+
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_line(),
+        axis.title.y = element_text(vjust = -6))
+p5_glx <- p5_glx + scale_y_continuous(limits = c(-25, 25), breaks = c(-15,0, 15))
+p6_naa <- p6_naa + scale_y_continuous(limits = c(-25, 25), breaks = c(-15,0, 15))+
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_line(),
+        axis.title.y = element_text(vjust = -6))
+p7_tnaa <- p7_tnaa + scale_y_continuous(limits = c(-25, 25), breaks = c(-15,0, 15))
+p8_tch <- p8_tch + scale_y_continuous(limits = c(-25, 25), breaks = c(-15,0, 15))+
   theme(axis.text.y = element_blank(),
         axis.ticks.y = element_line(),
         axis.title.y = element_text(vjust = 0))
-p3_tcr <- p3_tcr + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))
-p4_glu <- p4_glu + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))+
-  theme(axis.text.y = element_blank(),
-        axis.ticks.y = element_line(),
-        axis.title.y = element_text(vjust = 0))
-p5_glx <- p5_glx + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))
-p6_naa <- p6_naa + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))+
-  theme(axis.text.y = element_blank(),
-        axis.ticks.y = element_line(),
-        axis.title.y = element_text(vjust = 0))
-p7_tnaa <- p7_tnaa + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))
-p8_tch <- p8_tch + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))+
-  theme(axis.text.y = element_blank(),
-        axis.ticks.y = element_line(),
-        axis.title.y = element_text(vjust = 0))
-p9_mi <- p9_mi + scale_y_continuous(limits = c(-60, 60), breaks = c(-50,0, 50))+
+p9_mi <- p9_mi + scale_y_continuous(limits = c(-25, 25), breaks = c(-15,0, 15))+
   theme(axis.text.y = element_blank(),
         axis.ticks.y = element_line(),
         axis.title.y = element_text(vjust = 0))
