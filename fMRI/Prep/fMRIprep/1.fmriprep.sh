@@ -12,15 +12,13 @@ docker run -ti --rm \
 
 # preprocessing the BOLD data only
 docker run -ti --rm \
-    -v /Users/wang/Desktop/Research_projects/BBSC/Functional/Data/Reorganized:/data:ro \
-    -v /Users/wang/Desktop/Research_projects/BBSC/Functional/fMRI_Prep:/out \
-    -v /Users/wang/Desktop/Freesurfer/license.txt:/opt/freesurfer/license.txt \
-    nipreps/fmriprep:22.0.1 \
+    -v /Users/joeywang/Desktop/BBSC/Functional/fmri/rawdata:/data:ro \
+    -v /Users/joeywang/Desktop/BBSC/Functional/fmri/derivatives/fmriprep-23.2.0:/out \
+    -v /Users/joeywang/Desktop/license.txt:/opt/freesurfer/license.txt \
+    nipreps/fmriprep:23.2.0 \
     /data /out participant \
-    --skip_bids_validation --participant_label 1 --fs-no-reconall \
-    --fs-subjects-dir /Users/wang/Desktop/Research_projects/BBSC/Functional/T1_analysis \
-    --output-spaces MNI152NLin6Asym:res-2 \
-    --output-layout bids --resource-monitor --verbose  
+    --skip_bids_validation --participant_label 1 \
+    --longitudinal --resource-monitor --verbose 
     
     
  # suggestions to use fmriprep:
