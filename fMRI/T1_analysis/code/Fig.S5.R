@@ -1,4 +1,4 @@
-# This code is to plot the time change of subcortex Fig.S4
+# This code is to plot the time change of subcortex Fig.S5
 
 # WANG. 04-April-2024
 
