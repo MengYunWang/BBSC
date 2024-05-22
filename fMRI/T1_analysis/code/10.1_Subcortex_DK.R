@@ -1,7 +1,6 @@
 # This code is to
 # 1. load the subcortex data
 # 2. calculate and plot the CV of the subcortex
-# 2. plot the mean, ordered mean; cv and percentage change 
 
 # WANG. 04-April-2024
 
