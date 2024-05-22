@@ -1,7 +1,6 @@
 # This code is to 
-# 1. calculate and plot the CV of the sMRI data
-# 2. plot the percentage change of each region with box plot
-# 3. combing these two steps together to one figure
+# 1. Calculate and plot the CV of the sMRI data
+# 2. Plot the percentage change of each region with box plot
 
 # WANG. 26-Feb-2024
 
