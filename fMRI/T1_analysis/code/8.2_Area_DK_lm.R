@@ -1,9 +1,9 @@
 # This code is to
-# 1. load the data and add more variables
-# 2. calculate and plot the average ordered
-# 3. calculate the percentage change of the area
-# 4. linear mixed regression to day and time effects
-# 5. Plot the brain regions that have day or time effects
+# 1. Load the data and add more variables
+# 2. Calculate and plot the average ordered
+# 3. Calculate the percentage change in the area
+# 4. Linear mixed regression to  time effects
+
 
 # WANG. 04-March-2024
 
@@ -608,7 +608,7 @@ p_adjusted_small <- lapply(modell_day, function(model) {
 # p_adjusted_small <- p_adjusted[p_adjusted < 0.01] %>%
 #   print()
 
-## -----------------------------------about day length
+## -----------------------------------about daylight length
 
 # within each subj
 modell_time <- lapply(sub_per_change_long, function(df) {
