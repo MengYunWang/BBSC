@@ -1,4 +1,4 @@
-# This code is to analyze the effect of FBER and plot Fig.9 and Fig. S1-3
+# This code is to plot Fig.9 and Fig. S2
 
 # WANG. 03-April-2024
 
