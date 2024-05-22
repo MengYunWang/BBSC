@@ -1,9 +1,9 @@
-# This code is to ploto the Fig 8 and Fig. S5
+# This code is to plot the Fig. S6 and Fig. S15
 
 
 # WANG. 04-April-2024
 
-# Remove all objects created before to prevent clash
+# Remove all objects created before to prevent a clash
 rm(list = ls())
 
 library(dplyr)
@@ -442,11 +442,11 @@ FigS15 <- (plots_brain_mean[[1]] / plots_volume_ordered[[1]]) |
   (plots_brain_mean[[2]] / plots_volume_ordered[[2]]) |
   (plots_brain_mean[[3]] / plots_volume_ordered[[3]]) 
 
-# ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS5.tiff",
-#        plot = FigS5, width = 10, height = 8.5, units = 'in', dpi = 300, compression = "lzw")
+# ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS15.tiff",
+#        plot = FigS15, width = 10, height = 8.5, units = 'in', dpi = 300, compression = "lzw")
 
-# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS5.tiff",
-#        plot = FigS5, width = 13, height = 9, units = 'in', dpi = 300, compression = "lzw")
+# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS15.tiff",
+#        plot = FigS15, width = 13, height = 9, units = 'in', dpi = 300, compression = "lzw")
 
 
 
