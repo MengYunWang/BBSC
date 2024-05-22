@@ -1,13 +1,13 @@
 # This code is to
-# 1. load the data and add more variables
-# 2. calculate and plot the average ordered
-# 3. calculate the percentage change of the volume
-# 4. linear mixed regression to day and time effects
-# 5. Plot the brain regions that have day or time effects
+# 1. Load the data and add more variables
+# 2. Calculate and plot the average ordered
+# 3. Calculate the percentage change in the volume
+# 4. Linear mixed regression to time effects
+
 
 # WANG. 04-March-2024
 
-# Remove all objects created before to prevent clash
+# Remove all objects created before to prevent a clash
 rm(list = ls())
 
 library(dplyr)
@@ -599,7 +599,7 @@ p_adjusted_small <- lapply(modell_day, function(model) {
 # p_adjusted_small <- p_adjusted[p_adjusted < 0.01] %>%
 #   print()
 
-## -----------------------------------about time of year of Longitudinal change
+## -----------------------------------about the daylight effect
 
 # within each subj
 modell_time <- lapply(sub_per_change_long, function(df) {
