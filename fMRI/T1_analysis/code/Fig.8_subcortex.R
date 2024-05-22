@@ -1,4 +1,4 @@
-# This code is to ploto the Fig 8 and Fig. S5
+# This code is to plot the Fig 8
 
 
 # WANG. 04-April-2024
