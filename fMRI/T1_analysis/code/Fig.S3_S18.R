@@ -1,4 +1,4 @@
-# This code is to plot the distribution of whole brain structure indices
+# This code is to plot Fig. S3 and Fig. S18
 
 # WANG. 20-Feb-2024
 
@@ -631,14 +631,14 @@ plots_day_normal_sub <-
     return(plots_sub)
   })
 
-FigS7 <- plots_day_long_sub[[1]][[1]] + plots_day_long_sub[[2]][[1]] + plots_day_long_sub[[3]][[1]] + plots_day_long_all[1] +
+FigS3 <- plots_day_long_sub[[1]][[1]] + plots_day_long_sub[[2]][[1]] + plots_day_long_sub[[3]][[1]] + plots_day_long_all[1] +
   plots_day_long_sub[[1]][[2]] + plots_day_long_sub[[2]][[2]] + plots_day_long_sub[[3]][[2]] + plots_day_long_all[2] +
   plots_day_long_sub[[1]][[3]] + plots_day_long_sub[[2]][[3]] + plots_day_long_sub[[3]][[3]] + plots_day_long_all[3] +
   plots_day_long_sub[[1]][[4]] + plots_day_long_sub[[2]][[4]] + plots_day_long_sub[[3]][[4]] + plots_day_long_all[4] +
   plots_day_long_sub[[1]][[5]] + plots_day_long_sub[[2]][[5]] + plots_day_long_sub[[3]][[5]] + plots_day_long_all[5] +
   plot_layout (ncol=4, axis_titles = "collect_x") +  plot_layout (axis_titles = "collect_y") 
 
-FigS8 <- 
+FigS18 <- 
   plots_day_normal_sub[[1]][[1]] + plots_day_normal_sub[[2]][[1]] + plots_day_normal_sub[[3]][[1]] + plots_day_normal_all[1] +
   plots_day_normal_sub[[1]][[2]] + plots_day_normal_sub[[2]][[2]] + plots_day_normal_sub[[3]][[2]] + plots_day_normal_all[2] +
   plots_day_normal_sub[[1]][[3]] + plots_day_normal_sub[[2]][[3]] + plots_day_normal_sub[[3]][[3]] + plots_day_normal_all[3] +
@@ -646,16 +646,16 @@ FigS8 <-
   plots_day_normal_sub[[1]][[5]] + plots_day_normal_sub[[2]][[5]] + plots_day_normal_sub[[3]][[5]] + plots_day_normal_all[5] +
   plot_layout (ncol=4, axis_titles = "collect_x") +  plot_layout (axis_titles = "collect_y") 
 
-# ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS7.tiff", 
-#        plot = FigS7, width = 10, height = 12, units = 'in', dpi = 300, compression = "lzw")
+# ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS3.tiff", 
+#        plot = FigS3, width = 10, height = 12, units = 'in', dpi = 300, compression = "lzw")
 
-ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS7.tiff",
-       plot = FigS7, width = 10, height = 12, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS3.tiff",
+       plot = FigS3, width = 10, height = 12, units = 'in', dpi = 300, compression = "lzw")
 
 
-# ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS8.tiff", 
-#        plot = FigS8, width = 10, height = 12, units = 'in', dpi = 300, compression = "lzw")
+# ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS18.tiff", 
+#        plot = FigS18, width = 10, height = 12, units = 'in', dpi = 300, compression = "lzw")
 
-ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS8.tiff",
-       plot = FigS8, width = 10, height = 12, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS18.tiff",
+       plot = FigS18, width = 10, height = 12, units = 'in', dpi = 300, compression = "lzw")
 
