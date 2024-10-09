@@ -101,7 +101,7 @@ data_sets <- lapply(file_paths, function(path) {
 
 names(data_sets) <- c("sub1", "sub2", "sub3")
 
-data_sets[["sub3"]][c(1,7), ] <- NA # delete the 1st and 7th, pay attention to the files that need to be saved
+# data_sets[["sub3"]][c(1,7), ] <- NA # delete the 1st and 7th, pay attention to the files that need to be saved
 
 # add more factors into the data
 morning_sub1 <-

@@ -163,9 +163,13 @@ thickness_half3 <- combine_plots_for_range(23, 34, plots_ToD_thickness_sub1, plo
 
 thickness_ToD <- (thickness_half1 | thickness_half2 | thickness_half3) + plot_layout(guides = 'collect')
 
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS3.tiff",
-       plot = thickness_ToD, width = 27, height = 40, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS3.png",
+       plot = thickness_ToD, width = 27, height = 40, units = 'in', dpi = 100)
 
-# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS3.tiff",
-#        plot = thickness_ToD, width = 27, height = 40, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS3_hd.png",
+       plot = thickness_ToD, width = 27, height = 40, units = 'in', dpi = 300)
+
+
+# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS3.png",
+#        plot = thickness_ToD, width = 27, height = 40, units = 'in', dpi = 300)
 

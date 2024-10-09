@@ -1,9 +1,9 @@
-# This code is to 
-# 1. calculate and plot the CV of the sMRI data
-# 2. plot the percentage change of each region with box plot
-# 3. combing these two steps together to one figure
+# This code is to do analysis on cortical volume
+# 1. calculate, plot, save the CV with ggseg
+# 2. calculate, plot, save the percentage change of each region with box plot
 
-# WANG. 26-Feb-2024
+
+# WANG. 26-Feb-2024; updated 01-OCT-2024
 
 # Remove all objects created before to prevent clash
 rm(list=ls())
@@ -19,7 +19,7 @@ library(patchwork)
 setwd("/Users/wang/Desktop/Research_projects/BBSC/Functional/fmri/derivatives/freesurfer-v7.2.0/")
 # setwd("//Users/joeywang/Desktop/BBSC/Functional/fmri/derivatives/freesurfer-v7.2.0/")
 
-## --------------------------------Load the data
+## ----------------Load the data
 # define the file path
 file_paths <- c(
   "sub-1/1.statistics/long_pipeline/lh_volume_dk.txt",
@@ -58,7 +58,7 @@ read_and_label_fs_data <- function(side, path) {
     mutate(label = paste0(side, "_", label))
 }
 
-# funtion to plot the cv with ggseg
+# function to plot the cv with ggseg
 plot_cv_volume <- function(cv_volume_data) {
   ggplot(cv_volume_data) +
     geom_brain(atlas = dk, 
@@ -78,7 +78,7 @@ plot_mean_volume <- function(mean_volume_data) {
     theme_void()
 }
 
-# calculate the cv and mean, and then plot them with ggseg
+#--------------------calculate the cv and mean, and then plot them with ggseg
 plots_brain_cv <- list()
 plots_brain_mean <- list()
 for (sub in 1:3) {
@@ -125,7 +125,7 @@ save(plots_brain_volume_cv_qc, file = "plots_brain_volume_cv_qc.RData")
 save(plots_brain_volume_mean_qc, file = "plots_brain_volume_mean_qc.RData") # save it for reuse
 
 
-# ----------------------------------calculate the cv and mean across all sessions
+# --------------------save cv and mean across all sessions
 fs_data <- read_freesurfer_stats(paste0("sub-1/sub-1_ses-1_T1w/stats/lh.aparc.stats")) %>%
   add_row(label = "total") %>%
   mutate(across(-label, ~NA))
@@ -165,8 +165,10 @@ volume_mean_ranked <- volume_mean %>%
   slice(-c(35, 70)) %>% #exclude the average row
   mutate(across(where(is.numeric), ~as.integer(rank(., ties.method = "first")), .names = "{.col}_rank"))
 
+write.csv(volume_cv, 'volume_cv_qc.csv')
+write.csv(volume_mean, 'volume_mean_qc.csv')
 
-##------------------------------------ Part II: Plot the boxplot of each region (Fig. 3 in the manuscript)
+##------------------------------------ Part II: Plot the boxplot of each region
 
 # function that calculate the percentage change and box plot them
 process_subject <- function(subj) {

@@ -190,7 +190,7 @@ plots_long_cv[[1]] <- plots_long_cv[[1]] +
   theme(plot.title = element_text(size = 18, face = "bold", family = "sans", color = "black", hjust =0.5))
 
 plots_normal_cv[[1]] <- plots_normal_cv[[1]] + 
-  ggtitle("Independent") +
+  ggtitle("Cross-sectional") +
   theme(plot.title = element_text(size = 18, face = "bold", family = "sans", color = "black", hjust =0.5))
 
 # arrange the subplots into one plot

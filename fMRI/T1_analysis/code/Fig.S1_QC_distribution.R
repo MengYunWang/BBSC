@@ -185,11 +185,11 @@ plots_qc_sub <- plots_qc_half_violin$cnr + plots_qc_half_violin$snr_total + plot
 # Fig1 <- (plots_qc_sub| plots_qc_matrix) / plots_per_change
 FigS1 <- (plots_qc_sub + theme(plot.margin = unit(c(0,0,30,0), "pt"))) / plots_qc_matrix 
 
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS1.tiff", 
-       plot = FigS1, width = 8, height = 13, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS1.png", 
+       plot = FigS1, width = 8, height = 13, units = 'in', dpi = 300)
 
-# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig1.tiff",
-        # plot = Fig1, width = 13, height = 13, units = 'in', dpi = 300, compression = "lzw")
+# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig1.png",
+        # plot = Fig1, width = 13, height = 13, units = 'in', dpi = 300)
 
 
 

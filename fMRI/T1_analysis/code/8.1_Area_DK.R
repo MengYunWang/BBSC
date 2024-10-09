@@ -1,9 +1,9 @@
-# This code is to 
-# 1. calculate and plot the CV of the sMRI data
-# 2. plot the percentage change of each region with box plot
-# 3. combing these two steps together to one figure
+# This code is to do analysis on surface area
+# 1. calculate, plot, save the CV with ggseg
+# 2. calculate, plot, save the percentage change of each region with box plot
 
-# WANG. 26-Feb-2024
+
+# WANG. 26-Feb-2024; updated 01-OCT-2024
 
 # Remove all objects created before to prevent clash
 rm(list=ls())
@@ -19,7 +19,7 @@ library(patchwork)
 setwd("/Users/wang/Desktop/Research_projects/BBSC/Functional/fmri/derivatives/freesurfer-v7.2.0/")
 # setwd("//Users/joeywang/Desktop/BBSC/Functional/fmri/derivatives/freesurfer-v7.2.0/")
 
-## --------------------------------Load the data
+## --------------------------Load the data
 # define the file path
 file_paths <- c(
   "sub-1/1.statistics/long_pipeline/lh_area_dk.txt",
@@ -39,8 +39,9 @@ names(data_sets) <- c("sub1_lh", "sub1_rh", "sub2_lh", "sub2_rh", "sub3_lh", "su
 
 list2env(data_sets, envir = .GlobalEnv)
 
-sub3_lh[c(1,7), ] <- NA # delete the 7th
-sub3_rh[c(1,7), ] <- NA # delete the 7th collection because of the qc
+sub3_lh[c(1,7), ] <- NA # delete the 1st and 7th
+sub3_rh[c(1,7), ] <- NA # delete the 1st and 7th collection because of the qc
+
 
 ##------------------Part I: Calculate the coefficient of variation for each subset and column
 
@@ -78,7 +79,7 @@ plot_mean_area <- function(mean_area_data) {
     theme_void()
 }
 
-# calculate the cv and mean, and then plot them with ggseg
+#--------------------calculate the cv and mean, and then plot them with ggseg
 plots_brain_cv <- list()
 plots_brain_mean <- list()
 for (sub in 1:3) {
@@ -113,7 +114,6 @@ for (sub in 1:3) {
     plot_mean_area()
 }
 
-
 # save the plots for the reuse
 # plots_brain_area_cv_orig <- plots_brain_cv
 # plots_brain_area_mean_orig <- plots_brain_mean
@@ -125,8 +125,7 @@ plots_brain_area_mean_qc <- plots_brain_mean
 save(plots_brain_area_cv_qc, file = "plots_brain_area_cv_qc.RData")
 save(plots_brain_area_mean_qc, file = "plots_brain_area_mean_qc.RData") # save it for reuse
 
-
-# ----------------------------------calculate the thicknes cv and mean across all sessions
+#-------------------- save the area cv and mean across all sessions
 fs_data <- read_freesurfer_stats(paste0("sub-1/sub-1_ses-1_T1w/stats/lh.aparc.stats")) %>%
   add_row(label = "total") %>%
   mutate(across(-label, ~NA))
@@ -166,9 +165,11 @@ area_mean_ranked <- area_mean %>%
   slice(-c(35, 70)) %>% #exclude the average row
   mutate(across(where(is.numeric), ~as.integer(rank(., ties.method = "first")), .names = "{.col}_rank"))
 
+write.csv(area_cv, 'area_cv_qc.csv')
+write.csv(area_mean, 'area_mean_qc.csv')
+
 
 #####------------------------------------ Part II: Plot the boxplot of each region
-
 # function to calculate the percentage change and box plot them
 process_subject <- function(subj) {
   fs_data_lh <- read_freesurfer_stats(paste0("sub-1/sub-1_ses-1_T1w/stats/lh.aparc.stats")) %>%
@@ -190,7 +191,7 @@ process_subject <- function(subj) {
   
   percent_long <- percent %>% 
     pivot_longer(cols = -c(hemi, subject), names_to = "region", values_to = "percent_change") %>%
-    filter(region != "total") %>%
+    filter(region != "total")
   
   return(percent_long)
 }

@@ -2,7 +2,7 @@
 # a. mean values of brain thickness
 # b. ranked brain regions according to the brain thickness
 # c. percentage changes along IQMs
-# d. percentage changes in sub2/1
+# d. percentage changes along the daylight length
 
 # WANG. 27-Mar-2024
 
@@ -25,7 +25,7 @@ setwd("/Users/wang/Desktop/Research_projects/BBSC/Functional/fmri/derivatives/fr
 #---------------------plot the left side of the figure Fig.S2AB
 
 load("plots_brain_thickness_mean_qc.RData") # generated from 7.1
-load("plots_thickness_ordered.RData") #generated from 7.2
+load("plots_thickness_ordered_qc.RData") #generated from 7.2
 
 plots_brain_thickness_mean_qc[[1]] <- plots_brain_thickness_mean_qc[[1]] + 
   theme(
@@ -84,7 +84,7 @@ plots_brain_thickness_mean_qc[[3]] <- plots_brain_thickness_mean_qc[[3]] +
   )
 
 plots_thickness_mean_ordered <- plots_brain_thickness_mean_qc[[1]] + plots_brain_thickness_mean_qc[[2]] + plots_brain_thickness_mean_qc[[3]] + 
-  (plots_thickness_ordered[[1]] + theme (plot.margin = margin(t = 0, r = 5, b = 10, l = 5, unit = "pt"))) + plot_layout(ncol =1)
+  (plots_thickness_ordered_qc[[1]] + theme (plot.margin = margin(t = 0, r = 5, b = 10, l = 5, unit = "pt"))) + plot_layout(ncol =1)
 
 # --------------------------------Plot the Fig S2C
 
@@ -311,10 +311,13 @@ FigS2 <- plots_thickness_mean_ordered | (plots_thickness_qc + plots_per_change_t
                                           plots_per_change_time[[3]] + 
                                           plot_layout(design = design))
 
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS2test.tiff",
-       plot = FigS2, width = 15.5, height = 11, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS2.png",
+       plot = FigS2, width = 15.5, height = 11, units = 'in', dpi = 100)
+
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS2_hd.png",
+       plot = FigS2, width = 15.5, height = 11, units = 'in', dpi = 300)
 # # 
-# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig2.tiff",
-#        plot = Fig2, width = 15.5, height = 11, units = 'in', dpi = 300, compression = "lzw")
+# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig2.png",
+#        plot = Fig2, width = 15.5, height = 11, units = 'in', dpi = 300)
 
 

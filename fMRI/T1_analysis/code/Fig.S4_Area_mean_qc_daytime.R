@@ -1,11 +1,10 @@
-
 # This code is to plot the Fig.S4
-# a. distribution of the IQM
-# b. correlations between IQMs
-# c. the percentage change of the mean value of the different pipelines
+# a. mean values of brain area
+# b. ranked brain regions according to the brain area
+# c. percentage changes along IQMs
+# d. percentage changes along the daylight length
 
 # WANG. 27-Mar-2024
-
 
 
 # Remove all objects created before to prevent clash
@@ -297,11 +296,14 @@ FigS4 <- plots_area_mean_ordered | (plots_area_qc + plots_area_time[[1]] +
                                      plots_area_time[[2]] + plots_area_time[[3]] +
                                      plot_layout(design = design))
 
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS4test.tiff",
-       plot = FigS4, width = 15.5, height = 11, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS4.png",
+       plot = FigS4, width = 15.5, height = 11, units = 'in', dpi = 100)
+
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS4_hd.png",
+       plot = FigS4, width = 15.5, height = 11, units = 'in', dpi = 300)
 # 
-# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS4.tiff",
-#        plot = FigS4, width = 15.5, height = 11, units = 'in', dpi = 300, compression = "lzw")
+# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS4.png",
+#        plot = FigS4, width = 15.5, height = 11, units = 'in', dpi = 300)
 
 
 

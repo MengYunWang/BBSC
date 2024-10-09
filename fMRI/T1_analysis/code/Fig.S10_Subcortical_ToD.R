@@ -158,9 +158,12 @@ subcortex_half1 <- combine_plots_for_range(1, 7, plots_time_subcortex_sub1, plot
 
 FigS10 <- (subcortex_half1) + plot_layout(guides = 'collect')
 
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS10.tiff",
-       plot = FigS10, width = 13, height = 18, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS10.png",
+       plot = FigS10, width = 13, height = 18, units = 'in', dpi = 100)
 
-# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS10.tiff",
-#        plot = FigS10, width = 14, height = 20, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS10_hd.png",
+       plot = FigS10, width = 13, height = 18, units = 'in', dpi = 300)
+
+# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS10.png",
+#        plot = FigS10, width = 14, height = 20, units = 'in', dpi = 300)
 

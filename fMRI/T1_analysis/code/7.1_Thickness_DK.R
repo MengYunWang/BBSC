@@ -166,7 +166,8 @@ thickness_mean_ranked <- thickness_mean %>%
   slice(-c(35, 70)) %>% #exclude the average row
   mutate(across(where(is.numeric), ~as.integer(rank(., ties.method = "first")), .names = "{.col}_rank"))
 
-
+write.csv(thickness_cv, 'thickness_cv_qc.csv')
+write.csv(thickness_mean, 'thickness_mean_qc.csv')
 ##------------------------------------ Part II: Plot the boxplot of each region
 
 # function to calculate the percentage change and converted into long form

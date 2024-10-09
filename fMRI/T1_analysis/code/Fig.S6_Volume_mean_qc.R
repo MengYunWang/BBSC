@@ -1,8 +1,8 @@
-
 # This code is to plot the Fig.S6
-# a. distribution of the IQM
-# b. correlations between IQMs
-# c. the percentage change of the mean value of the different pipelines
+# a. mean values of brain volume
+# b. ranked brain regions according to the brain volume
+# c. percentage changes along IQMs
+# d. percentage changes along the daylight length
 
 # WANG. 27-Mar-2024
 
@@ -299,9 +299,12 @@ FigS6 <- plots_volume_mean_ordered | (plots_volume_qc + plots_volume_time[[1]] +
                                        plots_volume_time[[2]]+ plots_volume_time[[3]] + 
                                        plot_layout(design = design))
 
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS6.tiff",
-       plot = FigS6, width = 15, height = 9.8, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS6.png",
+       plot = FigS6, width = 15, height = 9.8, units = 'in', dpi = 100)
 
-# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS6.tiff",
-#        plot = FigS6, width = 15, height = 9.8, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS6_hd.png",
+       plot = FigS6, width = 15, height = 9.8, units = 'in', dpi = 300)
+
+# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS6.png",
+#        plot = FigS6, width = 15, height = 9.8, units = 'in', dpi = 300)
 

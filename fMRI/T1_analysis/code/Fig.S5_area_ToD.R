@@ -1,4 +1,4 @@
-# This code is to plot Fig. S2
+# This code is to plot Fig. S5
 
 # WANG. 03-April-2024
 
@@ -164,9 +164,12 @@ area_half3 <- combine_plots_for_range(23, 34, plots_time_area_sub1, plots_time_a
 
 area_time <- (area_half1 | area_half2 | area_half3) + plot_layout(guides = 'collect')
 
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS2.tiff",
-       plot = area_time, width = 27, height = 40, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS5.png",
+       plot = area_time, width = 27, height = 40, units = 'in', dpi = 100)
 
-# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS2.tiff",
-#        plot = area_time, width = 27, height = 40, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS5_hd.png",
+       plot = area_time, width = 27, height = 40, units = 'in', dpi = 300)
+
+# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS5.png",
+#        plot = area_time, width = 27, height = 40, units = 'in', dpi = 300)
 

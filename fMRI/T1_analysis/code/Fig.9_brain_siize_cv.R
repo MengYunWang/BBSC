@@ -33,8 +33,8 @@ pivot_long <- function(data, value_name) {
     pivot_longer(cols = everything(), names_to = "subj", values_to = value_name)
 }
 
-files <- c("thickness_cv.csv", "area_cv.csv", "volume_cv.csv",
-           "thickness_mean.csv", "area_mean.csv", "volume_mean.csv")
+files <- c("thickness_cv_qc.csv", "area_cv_qc.csv", "volume_cv_qc.csv",
+           "thickness_mean_qc.csv", "area_mean_qc.csv", "volume_mean_qc.csv")
 
 names <- c("thickness_cv", "area_cv", "volume_cv", 
            "thickness_scaled", "area_scaled", "volume_scaled")
@@ -106,7 +106,7 @@ read_clean_scale <- function(file) {
   return(scaled)
 }
 
-
+#data from 10.1
 sub_files <- c("sub_cv_volume_sub.csv", "sub_mean_volume_sub.csv")
 
 names <- c("sub_cv", "sub_mean")

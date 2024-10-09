@@ -101,7 +101,7 @@ data_sets <- lapply(file_paths, function(path) {
 names(data_sets) <- c("sub1", "sub2", "sub3")
 
 # exclude the session 1 and 7 in sub3
-data_sets$sub3[c(1,7), ] <- NaN # pay attention to the saving files
+# data_sets$sub3[c(1,7), ] <- NaN # pay attention to the saving files
 
 
 # Convert each data frame to long format and calculate percentage change
@@ -167,29 +167,29 @@ sub_mean_sd_volume_sub <- lapply(data_sets, function (df) {
   return(results)
 })
 
-# # save all the variables
-# save(data_sets, file="sub_data_sets.RData")
-# save(sub_percent_long, file = "sub_percent_long.RData")
-# save(sub_mean_sd_volume_sub, file = "sub_mean_sd_volume_sub.Rdata")
-# write.csv(sub_cv_volume_sub, "sub_cv_volume_sub.csv", row.names = TRUE)
-# write.csv(sub_mean_volume_sub, "sub_mean_volume_sub.csv", row.names = TRUE)
-
 # save all the variables
-data_sets_qc <- data_sets
-save(data_sets_qc, file="sub_data_sets_qc.RData")
+save(data_sets, file="sub_data_sets.RData")
+save(sub_percent_long, file = "sub_percent_long.RData")
+save(sub_mean_sd_volume_sub, file = "sub_mean_sd_volume_sub.Rdata")
+write.csv(sub_cv_volume_sub, "sub_cv_volume_sub.csv", row.names = TRUE)
+write.csv(sub_mean_volume_sub, "sub_mean_volume_sub.csv", row.names = TRUE)
 
-sub_percent_long_qc <- sub_percent_long
-save(sub_percent_long_qc, file = "sub_percent_long_qc.RData")
-
-sub_cv_volume_sub_qc <- sub_cv_volume_sub
-save(sub_cv_volume_sub_qc, file = "sub_cv_volume_sub_qc.RData")
-write.csv(sub_cv_volume_sub_qc, "sub_cv_volume_sub_qc.csv", row.names = TRUE)
-
-sub_mean_volume_sub_qc <- sub_mean_volume_sub
-save(sub_mean_volume_sub_qc, file = "sub_mean_volume_sub_qc.RData")
-write.csv(sub_mean_volume_sub_qc, "sub_mean_volume_sub_qc.csv", row.names = TRUE)
-
-sub_mean_sd_volume_sub_qc <- sub_mean_sd_volume_sub
-save(sub_mean_sd_volume_sub_qc, file = "sub_mean_sd_volume_sub_qc.Rdata")
+# # save all the variables
+# data_sets_qc <- data_sets
+# save(data_sets_qc, file="sub_data_sets_qc.RData")
+# 
+# sub_percent_long_qc <- sub_percent_long
+# save(sub_percent_long_qc, file = "sub_percent_long_qc.RData")
+# 
+# sub_cv_volume_sub_qc <- sub_cv_volume_sub
+# save(sub_cv_volume_sub_qc, file = "sub_cv_volume_sub_qc.RData")
+# write.csv(sub_cv_volume_sub_qc, "sub_cv_volume_sub_qc.csv", row.names = TRUE)
+# 
+# sub_mean_volume_sub_qc <- sub_mean_volume_sub
+# save(sub_mean_volume_sub_qc, file = "sub_mean_volume_sub_qc.RData")
+# write.csv(sub_mean_volume_sub_qc, "sub_mean_volume_sub_qc.csv", row.names = TRUE)
+# 
+# sub_mean_sd_volume_sub_qc <- sub_mean_sd_volume_sub
+# save(sub_mean_sd_volume_sub_qc, file = "sub_mean_sd_volume_sub_qc.Rdata")
 
 

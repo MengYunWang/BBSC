@@ -1,4 +1,4 @@
-# This code is to analyze the effect of FBER and plot Fig.9 and Fig. S1-3
+# This code is to plot Fig.s8
 
 # WANG. 03-April-2024
 
@@ -163,9 +163,12 @@ volume_half3 <- combine_plots_for_range(23, 34, plots_time_volume_sub1, plots_ti
 
 volume_time <- (volume_half1 | volume_half2 | volume_half3) + plot_layout(guides = 'collect')
 
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS4.tiff",
-       plot = volume_time, width = 27, height = 40, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS8.png",
+       plot = volume_time, width = 27, height = 40, units = 'in', dpi = 100)
 
-# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS4.tiff",
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS8_hd.png",
+       plot = volume_time, width = 27, height = 40, units = 'in', dpi = 300)
+
+# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS8.png",
 #        plot = volume_time, width = 27, height = 40, units = 'in', dpi = 300, compression = "lzw")
 
