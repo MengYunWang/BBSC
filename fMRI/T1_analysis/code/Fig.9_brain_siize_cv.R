@@ -40,6 +40,7 @@ names <- c("thickness_cv", "area_cv", "volume_cv",
            "thickness_scaled", "area_scaled", "volume_scaled")
 
 #-----------read and convert data into long version
+# data from 7.1 8.1 9.1
 data_list <- lapply(files, FUN = read_clean_scale)
 names(data_list) <- names
 
@@ -73,11 +74,11 @@ plot_cv_brain_size <- function(data, cv, name){
   scale_color_manual(values=color_mapping) +
   theme_minimal() +
   theme(
-    plot.title = element_text(size = 18, family = "Arial", face = "bold", colour = "black", hjust = 0.5),
-    axis.title.x = element_text(size = 18, family = "Arial", face = "bold", colour = "black", vjust = -0.5),
-    axis.title.y = element_text(size = 18, family = "Arial", face = "bold", colour = "black", vjust = 1.5),
-    axis.text.x = element_text(size = 18, family = "Arial", face = "bold", colour = "black"),
-    axis.text.y = element_text(size = 18, family = "Arial", face = "bold", colour = "black"),
+    plot.title = element_text(size = 14, family = "Arial", face = "bold", colour = "black", hjust = 0.5),
+    axis.title.x = element_text(size = 16, family = "Arial", face = "bold", colour = "black", vjust = -0.5),
+    axis.title.y = element_text(size = 16, family = "Arial", face = "bold", colour = "black", vjust = 1.5),
+    axis.text.x = element_text(size = 14, family = "Arial", face = "bold", colour = "black"),
+    axis.text.y = element_text(size = 14, family = "Arial", face = "bold", colour = "black"),
     axis.ticks.length = unit(0.2, "cm"),
     axis.line = element_line(colour = 'black', linewidth = 1),
     panel.grid.major = element_blank(),
@@ -92,9 +93,9 @@ plot_cv_brain_size <- function(data, cv, name){
   )
 }
 
-plot_thickness_brain_size <- plot_cv_brain_size(data2analysis, data2analysis$thickness_cv, "Thickness")
-plot_area_brain_size <- plot_cv_brain_size(data2analysis, data2analysis$area_cv, "Surface Area")
-plot_volume_brain_size <- plot_cv_brain_size(data2analysis, data2analysis$volume_cv, "Cortical Volume")
+plot_thickness_brain_size <- plot_cv_brain_size(data2analysis, data2analysis$thickness_cv, "")
+plot_area_brain_size <- plot_cv_brain_size(data2analysis, data2analysis$area_cv, "")
+plot_volume_brain_size <- plot_cv_brain_size(data2analysis, data2analysis$volume_cv, "")
 
 
 read_clean_scale <- function(file) {
@@ -105,7 +106,8 @@ read_clean_scale <- function(file) {
   return(scaled)
 }
 
-sub_files <- c("sub_cv_volume_sub_qc.csv", "sub_mean_volume_sub_qc.csv")
+
+sub_files <- c("sub_cv_volume_sub.csv", "sub_mean_volume_sub.csv")
 
 names <- c("sub_cv", "sub_mean")
 
@@ -124,15 +126,15 @@ print(cor_test)
 plot_subvolume_brain_size <-   ggplot(sub_data2analysis, aes(x = sub_mean, y = sub_cv, color = subj)) +
   geom_point(size = 2) +
   geom_smooth(method=lm, se=TRUE, color="black", fill="grey") +
-  labs(title = "Subcortical Volume", x = "Scaled Brain Size", y = "Scaled CV") +
+  labs(title = "", x = "Scaled Brain Size", y = "Scaled CV") +
   scale_color_manual(values=color_mapping) +
   theme_minimal() +
   theme(
-    plot.title = element_text(size = 18, family = "Arial", face = "bold", colour = "black", hjust = 0.5),
-    axis.title.x = element_text(size = 18, family = "Arial", face = "bold", colour = "black", vjust = -0.5),
-    axis.title.y = element_text(size = 18, family = "Arial", face = "bold", colour = "black", vjust = 1.5),
-    axis.text.x = element_text(size = 18, family = "Arial", face = "bold", colour = "black"),
-    axis.text.y = element_text(size = 18, family = "Arial", face = "bold", colour = "black"),
+    plot.title = element_text(size = 14, family = "Arial", face = "bold", colour = "black", hjust = 0.5),
+    axis.title.x = element_text(size = 16, family = "Arial", face = "bold", colour = "black", vjust = -0.5),
+    axis.title.y = element_text(size = 16, family = "Arial", face = "bold", colour = "black", vjust = 1.5),
+    axis.text.x = element_text(size = 14, family = "Arial", face = "bold", colour = "black"),
+    axis.text.y = element_text(size = 14, family = "Arial", face = "bold", colour = "black"),
     axis.ticks.length = unit(0.2, "cm"),
     axis.line = element_line(colour = 'black', linewidth = 1),
     panel.grid.major = element_blank(),
@@ -150,8 +152,13 @@ plot_subvolume_brain_size <-   ggplot(sub_data2analysis, aes(x = sub_mean, y = s
 Fig9 <- plot_thickness_brain_size + theme(axis.title.x = element_blank(), plot.margin = margin(1.2, 1.2, 1.2, 1.2, "cm"))+
   plot_area_brain_size + theme(axis.title.x = element_blank(), axis.title.y = element_blank()) +
   plot_volume_brain_size +
-  plot_subvolume_brain_size + theme(axis.title.y = element_blank())
+  plot_subvolume_brain_size + theme(axis.title.y = element_blank()) + 
+  plot_annotation(tag_levels = 'A') &
+  theme(plot.tag = element_text(size = 22,
+                                family = "Arial",
+                                face = "bold",
+                                colour = "black"))
   
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig9.tiff", 
-       plot = Fig9, width = 10, height = 10, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig9.png", 
+       plot = Fig9, width = 10, height = 10, units = 'in', dpi = 300)
 

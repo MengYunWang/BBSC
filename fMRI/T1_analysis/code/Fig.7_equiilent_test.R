@@ -11,16 +11,19 @@ library(TOSTER)
 # Set the working directory to the path where your files are located
 setwd("/Users/wang/Desktop/Research_projects/BBSC/Functional/fmri/derivatives/freesurfer-v7.2.0/")
 
-
+#from 7.2
 load(file="meta_model_day_thickness.RData")
 load(file="meta_model_time_thickness.RData")
 
+#from 8.2
 load(file="meta_model_day_area.RData")
 load(file="meta_model_time_area.RData")
 
+#from 9.2
 load(file="meta_model_day_volume.RData")
 load(file="meta_model_time_volume.RData")
 
+#from 10.2
 load(file="meta_model_day_subcortex.RData")
 load(file="meta_model_time_subcortex.RData")
 
@@ -107,7 +110,7 @@ TOST_plot <- function(model_day, model_time, plot_title) {
       axis.ticks.y = element_blank(),
       axis.text.y = element_blank(),
       axis.title.y = element_blank(),
-      axis.line = element_line(colour = "black"),
+      axis.line = element_line(colour = 'black', linewidth = 1),
       # add x, y axis
       strip.background = element_blank(),
       strip.text = element_blank(),
@@ -134,13 +137,13 @@ TOST_plot <- function(model_day, model_time, plot_title) {
     )
 }
 
-plot_thickness <- TOST_plot(meta_model_day_thickness, meta_model_time_thickness, "Thickness")
-plot_area <- TOST_plot(meta_model_day_area, meta_model_time_area, "Surface")
-plot_volume <- TOST_plot(meta_model_day_volume, meta_model_time_volume, "Cortical Volume")
-plot_subcortical <- TOST_plot(meta_model_day_subcortex, meta_model_time_subcortex, "Subcortical Volume")
+plot_thickness <- TOST_plot(meta_model_day_thickness, meta_model_time_thickness, "")
+plot_area <- TOST_plot(meta_model_day_area, meta_model_time_area, "")
+plot_volume <- TOST_plot(meta_model_day_volume, meta_model_time_volume, "")
+plot_subcortical <- TOST_plot(meta_model_day_subcortex, meta_model_time_subcortex, "")
 
 
-plot_equi <- (plot_thickness |  plot_area) /
+plot_equi <- (plot_thickness + theme(axis.title.x = element_blank(), plot.margin = margin(1.2, 1.2, 1.2, 1.2, "cm")) |  plot_area + theme(axis.title.x = element_blank(), plot.margin = margin(1.2, 1.2, 1.2, 1.2, "cm"))) /
   (plot_volume |  plot_subcortical)+
   plot_layout(axis_titles = "collect_x") +
   plot_annotation(tag_levels = 'A') &
@@ -149,8 +152,8 @@ plot_equi <- (plot_thickness |  plot_area) /
                                 face = "bold",
                                 colour = "black"))
 
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig7_equiv.tiff",
-       plot = plot_equi, width = 9, height = 10, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig7_equiv.png",
+       plot = plot_equi, width = 9, height = 10, units = 'in', dpi = 300)
 
 
 

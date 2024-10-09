@@ -22,15 +22,15 @@ setwd("/Users/wang/Desktop/Research_projects/BBSC/Functional/fmri/derivatives/fr
 #### --------------------------------Part I Load the data
 
 # The followings are all generated from 10.1
-load("sub_cv_volume_sub_qc.RData")
-load("sub_percent_long_qc.RData")
+load("sub_cv_volume_sub.RData")
+load("sub_percent_long.RData")
 
 #### --------------------------------Part II Plot the data
 
 coronal_brain_aseg <- as_tibble(aseg) %>%
   filter(side == "coronal", !grepl("\\d", label))
 
-plots_brain_cv <- lapply(sub_cv_volume_sub_qc, function (df) {
+plots_brain_cv <- lapply(sub_cv_volume_sub, function (df) {
   ggplot() +
     geom_brain(atlas = aseg, side = "coronal",
                #position = position_brain(hemi ~ side),
@@ -45,8 +45,8 @@ plots_brain_cv <- lapply(sub_cv_volume_sub_qc, function (df) {
     theme_void()
 })
 
-plots_list_box <- lapply(names(sub_percent_long_qc), function(name) {
-  data <- sub_percent_long_qc[[name]] %>%
+plots_list_box <- lapply(names(sub_percent_long), function(name) {
+  data <- sub_percent_long[[name]] %>%
     mutate(
       region_order = case_when(
         hemi == "middle" ~ 1,
@@ -210,10 +210,10 @@ plots_list_box[[3]] <-
 Fig5 <-plots_brain_cv[[1]] + plots_brain_cv[[2]] + plots_brain_cv[[3]] +
   plots_list_box[[1]] + plots_list_box[[2]] + plots_list_box[[3]]
 
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig5test.tiff",
-       plot = Fig5, width = 12, height = 10, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig5.png",
+       plot = Fig5, width = 12, height = 10, units = 'in', dpi = 300)
 
-# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig8.tiff",
-#        plot = Fig8, width = 13, height = 9, units = 'in', dpi = 300, compression = "lzw")
+# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig5.png",
+#        plot = Fig8, width = 13, height = 9, units = 'in', dpi = 300)
 
 

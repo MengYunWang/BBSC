@@ -114,6 +114,6 @@ Fig8 <- plots_brain_thickness_cv_orig[[3]] + plots_brain_thickness_cv_qc[[3]] +
   plot_layout(ncol = 6)
 
 
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig8.tiff",
-       plot = Fig8, width = 16, height = 10, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig8.png",
+       plot = Fig8, width = 16, height = 10, units = 'in', dpi = 300)
 

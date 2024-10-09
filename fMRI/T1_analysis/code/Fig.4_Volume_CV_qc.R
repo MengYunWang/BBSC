@@ -3,7 +3,7 @@
 
 # WANG. 26-Mar-2024
 
-# Remove all objects created before to prevent clash
+# Remove all objects created before to prevent clashing
 rm(list=ls())
 
 library(dplyr)
@@ -62,11 +62,11 @@ plots_brain_volume_per_change_qc[[3]] <- plots_brain_volume_per_change_qc[[3]] +
 Fig4 <- plots_brain_volume_cv_qc[[1]] + plots_brain_volume_cv_qc[[2]] + plots_brain_volume_cv_qc[[3]] +
   plots_brain_volume_per_change_qc[[1]] + plots_brain_volume_per_change_qc[[2]] + plots_brain_volume_per_change_qc[[3]] + plot_layout(ncol = 3)
 
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig4.tiff", 
-       plot = Fig4, width = 13, height = 12, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig4.png", 
+       plot = Fig4, width = 13, height = 12, units = 'in', dpi = 300)
 
-# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig7.tiff", 
-#        plot = Fig7, width = 16, height = 12, units = 'in', dpi = 300, compression = "lzw")
+# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig7.png", 
+#        plot = Fig7, width = 16, height = 12, units = 'in', dpi = 300)
 
 ######## ----------------------------- ----------------------another way to plot
 # rm(list=ls())

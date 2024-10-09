@@ -81,7 +81,7 @@ create_ggplot_heatmap <- function(corr_matrix, title = "") {
   return(heatmap_plot)
 }
 
-# Calcualte the correlaiton matrix within each phenotypes
+# Calculate the correlation matrix within each phenotypes
 corr_within <- lapply(percentage_change, function(data) {
   data_sub1 <- data[grep("sub1", rownames(data)), ]
   data_sub2 <- data[grep("sub2", rownames(data)), ]
@@ -209,11 +209,11 @@ plot_corr_distribution <-
 
 FigS12 <- plot_corr_distribution
 
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS12.tiff",
-plot = FigS12, width = 9, height = 6.5, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS12.png",
+       plot = FigS12, width = 9, height = 6.5, units = 'in', dpi = 300)
 
-# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS12.tiff",
-#        plot = FigS12, width = 9, height = 6.5, units = 'in', dpi = 300, compression = "lzw")
+# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/FigS12.png",
+#        plot = FigS12, width = 9, height = 6.5, units = 'in', dpi = 300)
 
 ##-----------------------community detection
 
@@ -245,14 +245,18 @@ Fig6 <- heatmaps_within[[1]] + heatmaps_within[[2]] +
   theme(plot.margin = margin(t = 60, r = 30, b = 30, l = 30, unit = "pt")) + heatmaps_within[[3]] +
   heatmaps_between[[2]] + heatmaps_between[[1]] +
   theme(plot.margin = margin(t = 30, r = 30, b = 30, l = 30, unit = "pt")) + heatmaps_between[[3]] +
-  plot_layout(ncol = 3, guides = 'collect')
+  plot_layout(ncol = 3, guides = 'collect') +
+  plot_annotation(tag_levels = 'A') &
+  theme(plot.tag = element_text(size = 50,
+                                family = "Arial",
+                                face = "bold",
+                                colour = "black"))
 
-Fig6
 
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig6.tiff",
-plot = Fig6, width = 27, height = 18, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig6.png",
+plot = Fig6, width = 28, height = 18, units = 'in', dpi = 300)
 
-# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig6.tiff",
-#        plot = Fig6, width = 27, height = 18, units = 'in', dpi = 300, compression = "lzw")
+# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig6.png",
+#        plot = Fig6, width = 27, height = 18, units = 'in', dpi = 300)
 
 

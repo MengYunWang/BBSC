@@ -1,9 +1,9 @@
 
-# This code is to plot fig.2
+# This code is to plot Fig.2
 
 # WANG. 26-Mar-2024
 
-# Remove all objects created before to prevent clash
+# Remove all objects created before to prevent clashing
 rm(list=ls())
 
 library(dplyr)
@@ -62,11 +62,11 @@ Fig2 <- plots_brain_thickness_cv_qc[[1]] + plots_brain_thickness_cv_qc[[2]] + pl
   plots_brain_thickness_per_change_qc[[1]] + plots_brain_thickness_per_change_qc[[2]] + plots_brain_thickness_per_change_qc[[3]] + plot_layout(ncol = 3)
 
 
-ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig2test.tiff",
-       plot = Fig2, width = 13, height = 12, units = 'in', dpi = 300, compression = "lzw")
+ggsave("/Users/wang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig2.png",
+       plot = Fig2, width = 13, height = 12, units = 'in', dpi = 300)
 
-# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig3.tiff", 
-#        plot = Fig3, width = 16, height = 12, units = 'in', dpi = 300, compression = "lzw")
+# ggsave("/Users/joeywang/Library/CloudStorage/OneDrive-UniversityofBergen/Desktop/UiB/Manuscripts/BBSC/4.T1w_Image/Figures/Fig2.png", 
+#        plot = Fig3, width = 16, height = 12, units = 'in', dpi = 300)
 
 ######## ----------------------------- ----------------------another way to plot
 # rm(list=ls())
